@@ -1,1 +1,1 @@
-web: bundle exec ruby twitter_app_controller.rb -p $PORT
+web: bundle exec ruby twitter_app_controller.rb -p ($PORT || 5000)
