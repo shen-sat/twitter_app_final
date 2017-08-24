@@ -5,17 +5,15 @@ require 'twitter'
 require 'yaml'
 require 'erb'
 
-#sinatra bit of code - displays the html code
-puts "sinatra beginning"
-
+#sinatra bit of code - displays the html code constructed by making a new Begin class object and then calling the method init_app on that object
 get '/' do 
-	puts "sinatra running init_app"
 	b = Begin.new
 	b.init_app
-
 end
 
-#For sinatra to access this script (which draws data from Twitter and constructs the html code)
+#This is code for the 'Begin' class which has a method (init_app, which draws data from Twitter and constructs the html code).
+#Sinatra will call an object from this class and then run the def_init method on that object to run its associated code.
+#The def_init method returns html code (ruby methods return whatever value is produced last) which is needed by Sinatra to render the webpage.
 class Begin
 	def init_app
 		#Twitter authentication stuff **--REMEMBER TO DELETE YOUR DETAILS IF YOU MAKE PUBLIC--**
@@ -25,21 +23,19 @@ class Begin
 		  config.access_token        = "2347401997-3PzoVOwfAUCr5BVQJ4VmyooGGBXSlcMxV433NDs"
 		  config.access_token_secret = "kAkks0m2oWbKb2H9z874f6fMEsquH5xvdB6Tdm7CS95CQ"
 		 end
-		puts "login details done"
 
 		#get the time limit for 24 hours before the time of search and convert it to string 
 		yesterday_time = Time.now.utc - (60*60*24)
 		search_date_limit = yesterday_time.to_date.to_s
-		puts "time done"
+
 		#set up an array to collect the tweets from the search
 		todays_pixelart_tweets = [] 
 
 		#set the search operators. These are regular search operators that can be used within Twitter itself. 
 		pixel_art_tweets = client.search("#pixelart AND filter:images AND -filter:retweets AND -filter:replies AND since:#{search_date_limit}")
-		puts "search done"
 
 		#for each tweet in previous search, make sure it has media, make sure that media is a pic and make sure it was created by the ime set previously.
-		#This bit of code also has a .dup method -- this takes variable that can't be modified (eg tweet.created_at) and duplicates it so it can be modified.
+		#This bit of code also has a .dup method -- this takes variables that can't be modified (eg tweet.created_at) and duplicates it so it can be modified.
 		#In this code it is modified to display time in UTC (ie that's what the .utc method is for)
 		pixel_art_tweets.each do |tweet|
 			if tweet.media? && tweet.media[0].attrs[:type] == "photo" && tweet.created_at.dup.utc > yesterday_time
@@ -51,27 +47,16 @@ class Begin
 		sorted_tweets = todays_pixelart_tweets.sort_by do |tweet|
 			tweet.favorite_count
 		end
+		
 		#the sorted array will be in ascending order, so reverse it to get most-liked tweet at the top
 		reverse_sorted_tweets = sorted_tweets.reverse
+		
 		#because the html page this will be rendered into is a four by four grid, take the first four tweets and assign them to an array, then so the same
 		#with the next four tweets
 		top_four_tweets = reverse_sorted_tweets[0..3]
 		next_four_tweets = reverse_sorted_tweets[4..7]
-		puts "arrays sorted"
 
-
-=begin
-		top_pic = top_tweet.media[0]
-		# assign other variables to attributes of the tweet and/or its pic
-		pic_url = top_pic.media_url
-		fave_count = top_tweet.favorite_count
-		screen_name = top_tweet.user.screen_name
-		user_url = top_tweet.user.url
-=end
-
-
-		puts "html code beginning"
-		#set up the html code for the page and insert pixel art images
+		#set up the html code for the page and insert pixel art images and assign it to variable 'template'
 		template = %(
 		<html>
 		<title>W3.CSS Template</title>
@@ -99,8 +84,6 @@ class Begin
 
 		  <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width). --> 
 		  <div class="w3-row-padding w3-center"> 
-			
-			
 			
 			<!--set html code, image and details for each tweet in first array -->
 			<% top_four_tweets.each do |tweet| %>
@@ -135,10 +118,6 @@ class Begin
 			<p id="caption" class="w3-opacity w3-large"></p>
 		  </div>
 		</div>
-
-
-
-
 
 		<!-- Footer -->
 		<footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
@@ -197,19 +176,23 @@ class Begin
 			}
 		}
 		</script>
-
-
 		</body>
 		</html>
 		)
-		puts "html code ended"
 
-		#create an instance of the class ERB (which we do using the earlier required erb gem) and pass it the html code
+		#create an instance of the class ERB (which we do using the earlier required erb gem)... 
+		#...and pass it the template variable (which contains the html code)
 		html = ERB.new(template).result(binding)
+		#putting html right at the end ensure this method, init_app, returns the html variable whenever it is called
 		html
 	end
 end
-puts "def init_app finished running"
 
-
-puts "finished"
+=begin ---- spare/junk code ----
+		top_pic = top_tweet.media[0]
+		# assign other variables to attributes of the tweet and/or its pic
+		pic_url = top_pic.media_url
+		fave_count = top_tweet.favorite_count
+		screen_name = top_tweet.user.screen_name
+		user_url = top_tweet.user.url
+=end
