@@ -18,10 +18,10 @@ class Begin
 	def init_app
 		#Twitter authentication stuff **--REMEMBER TO DELETE YOUR DETAILS IF YOU MAKE PUBLIC--**
 		client = Twitter::REST::Client.new do |config|
-		  config.consumer_key        = "t3F5fBiVwUjsZyzxAcpDWGHF4"
-		  config.consumer_secret     = "YjEpZWx5xQYZ8RD82Dbgutd4m7kytoa3H3nvcppAVOy56LmhSe"
-		  config.access_token        = "2347401997-3PzoVOwfAUCr5BVQJ4VmyooGGBXSlcMxV433NDs"
-		  config.access_token_secret = "kAkks0m2oWbKb2H9z874f6fMEsquH5xvdB6Tdm7CS95CQ"
+		  config.consumer_key        = ""
+		  config.consumer_secret     = ""
+		  config.access_token        = ""
+		  config.access_token_secret = ""
 		 end
 
 		#get the time limit for 24 hours before the time of search and convert it to string 
