@@ -89,7 +89,7 @@ class Begin
 			<% top_four_tweets.each do |tweet| %>
 				<div class="w3-col m3">
 				<img src="<%= tweet.media[0].media_url %>" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" 
-				alt="Created at <%= tweet.created_at %> by @<a href='<%= tweet.user.url %>'><%= tweet.user.screen_name %></a>
+				alt="Created at <%= tweet.created_at %> by @<a href='<%= tweet.user.url %>' target='_blank'><%= tweet.user.screen_name %></a>
 				</br>Fave count: <%= tweet.favorite_count %>  ||  <a href='<%= tweet.url %>' target='_blank'>View tweet</a>">
 				</div>
 			<% end %>
@@ -102,7 +102,7 @@ class Begin
 			<% next_four_tweets.each do |tweet| %>
 				<div class="w3-col m3">
 				<img src="<%= tweet.media[0].media_url %>" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" 
-				alt="Created at <%= tweet.created_at %> by @<a href='<%= tweet.user.url %>'><%= tweet.user.screen_name %></a>
+				alt="Created at <%= tweet.created_at %> by @<a href='<%= tweet.user.url %>' target='_blank'><%= tweet.user.screen_name %></a>
 				</br>Fave count: <%= tweet.favorite_count %>  ||  <a href='<%= tweet.url %>' target='_blank'>View tweet</a>">
 				</div>
 			<% end %>
