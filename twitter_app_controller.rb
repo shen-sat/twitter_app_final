@@ -90,7 +90,7 @@ class Begin
 				<div class="w3-col m3">
 				<img src="<%= tweet.media[0].media_url %>" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" 
 				alt="Created at <%= tweet.created_at %> by @<a href='<%= tweet.user.url %>'><%= tweet.user.screen_name %></a>
-				</br>Fave count: <%= tweet.favorite_count %>  ||  <a href='<%= tweet.url %>'>View tweet</a>">
+				</br>Fave count: <%= tweet.favorite_count %>  ||  <a href='<%= tweet.url %>' target='_blank'>View tweet</a>">
 				</div>
 			<% end %>
 		  </div>
