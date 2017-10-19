@@ -71,7 +71,7 @@ class Begin
 					<!-- basic banner -->
 					<div class="mt4 w-100 w-80-m w-60-ns center tc ph3 mb5 mb4-ns">
 						<h1 class="f2 f1-l fw9 gray-90 mb0 lh-title sans-serif">MY FIRST WEB APP</h1>
-						<h2 class="fw1 f5 gray-80 mt3 mb4 lh-copy sans-serif">Below are the eight most favourited #pixelart images on Twitter in the past 24 hours.<br>
+						<h2 class="fw1 f5 gray-80 mt3 mb4 lh-copy sans-serif">Below are the ten most favourited #pixelart images on Twitter in the past 24 hours.<br>
 						Up-to-date images and their details are pulled from Twitter every time you refresh this page.</h2>
 					</div>
 					
