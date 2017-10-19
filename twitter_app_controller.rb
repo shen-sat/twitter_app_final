@@ -53,8 +53,7 @@ class Begin
 		
 		#because the html page this will be rendered into is a four by four grid, take the first four tweets and assign them to an array, then so the same
 		#with the next four tweets
-		top_four_tweets = reverse_sorted_tweets[0..3]
-		next_four_tweets = reverse_sorted_tweets[4..7]
+		top_ten_tweets = reverse_sorted_tweets[0..9]
 
 		#set up the html code for the page and insert pixel art images and assign it to variable 'template'
 		template = %(
