@@ -1,4 +1,4 @@
-#gems required test edit
+#gems required
 require 'sinatra'
 require 'rubygems'
 require 'twitter'
