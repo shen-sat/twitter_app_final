@@ -1,2 +1,2 @@
 # twitter_app_final
-My first web app
+A web app that searches for and displays the most popular pixelart on Twitter in the last 24 hours.
